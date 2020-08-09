@@ -10,7 +10,7 @@ else{
 }
 
 if(isset($_POST['logout'])){
-    header("Location: http://localhost/index.php");
+    header("Location: index.php");
 }
 //---------------------------------------------------------------------
 
