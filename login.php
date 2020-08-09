@@ -31,7 +31,7 @@ function validarCampos(){
         <form method="post">
             Nombre: <input type="text" name="who" required>
             Clave:  <input type="password" name="pass" required>
-            <input type="submit" value="Iniciar sesion">
+            <input type="submit" value="Log In">
         </form>
     </body>
 </html>
