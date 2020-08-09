@@ -1,16 +1,37 @@
+<?php
+function validarCampos(){
+    $valid_pass = 'Clave24_';
+    $hash_pass = md5($valid_pass);
+    $msg_pass_error = "";
+    if(isset($_POST['pass'])){
+        $hash_test = md5($_POST['pass']);
+        if($hash_pass !== $hash_test){
+            $msg_pass_error = "Clave incorrecta";
+        }
+        else{
+            header("Location: game.php?name=" . urldecode($_POST['who']));
+        }
+    }
+    echo "<font color='red'>" . $msg_pass_error . "</font>";
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login - Piedra Papel Tijeras</title>
+        <title>Leandro Hurtado Salazar e7d22b2d</title>
     </head>
 
     <body>
         <h1>Inicio de sesion</h1>
         <p>Ingrese sus datos apropiadamente</p>
-        <form>
-            Nombre: <input type="text" name="who">
-            Clave:  <input type="password" name="pass">
+        <p>
+        <?php validarCampos(); ?>
+        </p>
+        <form method="post">
+            Nombre: <input type="text" name="who" required>
+            Clave:  <input type="password" name="pass" required>
             <input type="submit" value="Iniciar sesion">
-        </form<
+        </form>
     </body>
 </html>
