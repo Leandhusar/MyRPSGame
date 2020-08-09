@@ -1,6 +1,7 @@
 <?php
 function validarCampos(){
-    $valid_pass = 'Clave24_';
+    //Correct pw=php123.
+    $valid_pass = 'php123';
     $hash_pass = md5($valid_pass);
     $msg_pass_error = "";
     if(isset($_POST['pass'])){
