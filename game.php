@@ -70,7 +70,7 @@ $resultado = check($computer, $human);
             </select>
 
             <input type="submit" name="logout" value="Salir">
-            <input type="submit" value="Jugar!">
+            <input type="submit" value="Play">
         </form>
 
         <?php
