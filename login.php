@@ -7,7 +7,7 @@ function validarCampos(){
     if(isset($_POST['pass'])){
         $hash_test = md5($_POST['pass']);
         if($hash_pass !== $hash_test){
-            $msg_pass_error = "Clave incorrecta";
+            $msg_pass_error = "Incorrect password";
         }
         else{
             header("Location: game.php?name=" . urldecode($_POST['who']));
