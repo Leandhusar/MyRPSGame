@@ -3,7 +3,7 @@
 //Se validan las entradas GET del nombre y POST de la selección logout
 $nombre_usuario = "";
 if(!isset($_GET['name'])){
-    die("Usuario no logeado");
+    die("Name parameter missing");
 }
 else{
     $nombre_usuario = $_GET['name'];
