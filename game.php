@@ -60,9 +60,10 @@ $resultado = check($computer, $human);
     <body>
         <h1>Bienvenido a Piedra Papel Tijeras</h1>
         <p>Bienvenido: <?php print $nombre_usuario; ?></p>
+        <p>Your Play=</p>
         <form method="post">
             <select name="human">
-            <option value="0">Seleccione su estrategia</option>
+            <option value="0">Your Play=</option>
             <option value="1">Piedra</option>
             <option value="2">Papel</option>
             <option value="3">Tijeras</option>
