@@ -44,7 +44,6 @@ $result = check($computer, $human);
 <html>
 <head>
 <title>Leandro Hurtado Salazar</title>
-<?php require_once "bootstrap.php"; ?>
 </head>
 <body>
 <div class="container">
