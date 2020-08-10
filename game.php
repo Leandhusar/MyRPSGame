@@ -16,35 +16,35 @@ if(isset($_POST['logout'])){
 
 /*Se definen los valores de piedra, papel y tijeras
 bajo la siguiente convencion:
-- Piedra = 1
-- Papel = 2
-- Tijeras = 3
+- Piedra = 0
+- Papel = 1
+- Tijeras = 2
 */
 
-$names = array('', 'Piedra', 'Papel', 'Tijeras');
+$names = array('Piedra', 'Papel', 'Tijeras');
 
 //Se inicializan los valores para el jugador y la computadora
 if(isset($_POST['human'])){
     $human = $_POST['human'] + 0;
 }
 else{
-    $human = 0;
+    $human = -1;
 }
-$computer = rand(1, 3);
+$computer = rand(0, 2);
 
 //Funcion que evalua quien gana el juego cada ronda
 function check($computer, $human){
     if($human == $computer){return 'Empate';}
-    else if($human == 1){
-        if($computer == 2){return 'Derrota';}
+    else if($human == 0){
+        if($computer == 1){return 'Derrota';}
         else{return 'Victoria';}
     }
-    else if($human == 2){
-        if($computer == 1){return 'Victoria';}
+    else if($human == 1){
+        if($computer == 2){return 'Victoria';}
         else{return 'Derrota';}
     }
-    else if($human == 3){
-        if($computer == 1){return 'Derrota';}
+    else if($human == 2){
+        if($computer == 0){return 'Derrota';}
         else{return 'Victoria';}
     }
 }
@@ -63,11 +63,11 @@ $resultado = check($computer, $human);
         <p>Your Play=</p>
         <form method="post">
             <select name="human">
-            <option value="0">Your Play=</option>
-            <option value="1">Piedra</option>
-            <option value="2">Papel</option>
-            <option value="3">Tijeras</option>
-            <option value="4">Prueba</option>
+            <option value="-1">Your Play=</option>
+            <option value="0">Piedra</option>
+            <option value="1">Papel</option>
+            <option value="2">Tijeras</option>
+            <option value="3">Your Play=</option>
             </select>
 
             <input type="submit" name="logout" value="Salir">
@@ -75,19 +75,19 @@ $resultado = check($computer, $human);
         </form>
 
         <?php
-        if($human == 0){
+        if($human == -1){
             echo "Seleccione una estrategia</br>";
         }
-        else if($human == 4){
-            for($c=1; $c<4; $c++){
-                for($h=1;$h<4;$h++) {
+        else if($human == 3){
+            for($c=0; $c<3; $c++){
+                for($h=0;$h<3;$h++) {
                     $r = check($c, $h);
                     echo "Your Play= $names[$h]   CPU = $names[$c]   Resultado = $r</br>";
                 }
             }
         }
         else{
-            echo "Your Play= $names[$human]   Estrategia CPU = $names[$computer]   Resultado = $resultado</br>";
+            echo "Your Play=" . $names[$human] . "Estrategia CPU = $names[$computer]   Resultado = $resultado</br>";
         }
         ?>
     </body>
