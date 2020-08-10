@@ -1,95 +1,89 @@
 <?php
-//---------------------------------------------------------------------
-//Se validan las entradas GET del nombre y POST de la selección logout
-$nombre_usuario = "";
-if(!isset($_GET['name'])){
-    die("Name parameter missing");
-}
-else{
-    $nombre_usuario = $_GET['name'];
+
+// Demand a GET parameter
+if ( ! isset($_GET['name']) || strlen($_GET['name']) < 1  ) {
+    die('Name parameter missing');
 }
 
-if(isset($_POST['logout'])){
-    header("Location: index.php");
+// If the user requested logout go back to index.php
+if ( isset($_POST['logout']) ) {
+    header('Location: index.php');
+    return;
 }
-//---------------------------------------------------------------------
 
-/*Se definen los valores de piedra, papel y tijeras
-bajo la siguiente convencion:
-- Piedra = 0
-- Papel = 1
-- Tijeras = 2
-*/
+// Set up the values for the game...
+// 0 is Rock, 1 is Paper, and 2 is Scissors
+$names = array('Rock', 'Paper', 'Scissors');
+$human = isset($_POST["human"]) ? $_POST['human']+0 : -1;
 
-$names = array('Piedra', 'Papel', 'Tijeras');
+$computer = 0; // Hard code the computer to rock
+// TODO: Make the computer be random
+$computer = rand(0,2);
 
-//Se inicializan los valores para el jugador y la computadora
-if(isset($_POST['human'])){
-    $human = $_POST['human'] + 0;
-}
-else{
-    $human = -1;
-}
-$computer = rand(0, 2);
-
-//Funcion que evalua quien gana el juego cada ronda
-function check($computer, $human){
-    if($human == $computer){return 'Empate';}
-    else if($human == 0){
-        if($computer == 1){return 'Derrota';}
-        else{return 'Victoria';}
+// This function takes as its input the computer and human play
+// and returns "Tie", "You Lose", "You Win" depending on play
+// where "You" is the human being addressed by the computer
+function check($computer, $human) {
+    // For now this is a rock-savant checking function
+    // TODO: Fix this
+    if ( $human == $computer ) {
+        return "Empate";
+    } else if ( ($human == 0 && $computer == 2)||($human == 2 && $computer == 1)||($human == 1 && $computer == 0)) {
+        return "Victoria!";
+    } else {
+        return "Derrota";
     }
-    else if($human == 1){
-        if($computer == 2){return 'Victoria';}
-        else{return 'Derrota';}
-    }
-    else if($human == 2){
-        if($computer == 0){return 'Derrota';}
-        else{return 'Victoria';}
-    }
+    return false;
 }
-$resultado = check($computer, $human);
+
+// Check to see how the play happenned
+$result = check($computer, $human);
+
 ?>
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Leandro Hurtado Salazar e7d22b2d</title>
-    </head>
+<head>
+<title>Jesus Zapata, Paper, Scissors Game</title>
+<?php require_once "bootstrap.php"; ?>
+</head>
+<body>
+<div class="container">
+<h1>Rock Paper Scissors</h1>
+<?php
+if ( isset($_REQUEST['name']) ) {
+    echo "<p>Welcome: ";
+    echo htmlentities($_REQUEST['name']);
+    echo "</p>\n";
+}
+?>
+<form method="post">
+<select name="human">
+<option value="-1">Select</option>
+<option value="0">Rock</option>
+<option value="1">Paper</option>
+<option value="2">Scissors</option>
+<option value="3">Test</option>
+</select>
+<input type="submit" value="Play">
+<input type="submit" name="logout" value="Logout">
+</form>
 
-    <body>
-        <h1>Bienvenido a Piedra Papel Tijeras</h1>
-        <p>Bienvenido: <?php print $nombre_usuario; ?></p>
-        <p>Your Play=</p>
-        <form method="post">
-            <select name="human">
-            <option value="-1">Your Play=</option>
-            <option value="0">Piedra</option>
-            <option value="1">Papel</option>
-            <option value="2">Tijeras</option>
-            <option value="3">Your Play=</option>
-            </select>
-
-            <input type="submit" name="logout" value="Salir">
-            <input type="submit" value="Play">
-        </form>
-
-        <?php
-        if($human == -1){
-            echo "Seleccione una estrategia</br>";
+<pre>
+<?php
+if ( $human == -1 ) {
+    print "Please select a strategy and press Play.\n";
+} else if ( $human == 3 ) {
+    for($c=0;$c<3;$c++) {
+        for($h=0;$h<3;$h++) {
+            $r = check($c, $h);
+            print "Human=$names[$h] Computer=$names[$c] Result=$r\n";
         }
-        else if($human == 3){
-            for($c=0; $c<3; $c++){
-                for($h=0;$h<3;$h++) {
-                    $r = check($c, $h);
-                    echo "Your Play= $names[$h]   CPU = $names[$c]   Resultado = $r</br>";
-                }
-            }
-        }
-        else{
-            echo "Your Play= $names[$human] Computer PLay= $names[$computer]   Resultado = $resultado</br>";
-        }
-        ?>
-    </body>
+    }
+} else {
+    print "Your Play=$names[$human] Computer Play=$names[$computer] Result=$result\n";
+}
+?>
+</pre>
+</div>
+</body>
 </html>
-
