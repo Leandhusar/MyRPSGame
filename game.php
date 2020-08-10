@@ -81,12 +81,12 @@ $resultado = check($computer, $human);
             for($c=1; $c<4; $c++){
                 for($h=1;$h<4;$h++) {
                     $r = check($c, $h);
-                    echo "Humano = $names[$h]   CPU = $names[$c]   Resultado = $r</br>";
+                    echo "Your Play= $names[$h]   CPU = $names[$c]   Resultado = $r</br>";
                 }
             }
         }
         else{
-            echo "Tu estrategia = $names[$human]   Estrategia CPU = $names[$computer]   Resultado = $resultado</br>";
+            echo "Your Play= $names[$human]   Estrategia CPU = $names[$computer]   Resultado = $resultado</br>";
         }
         ?>
     </body>
