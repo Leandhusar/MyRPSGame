@@ -27,11 +27,11 @@ function check($computer, $human) {
     // For now this is a rock-savant checking function
     // TODO: Fix this
     if ( $human == $computer ) {
-        return "Empate";
-    } else if ( ($human == 0 && $computer == 2)||($human == 2 && $computer == 1)||($human == 1 && $computer == 0)) {
-        return "Victoria!";
-    } else {
-        return "Derrota";
+        return "Tie";
+    } else if ( ($human == 1 && $computer == 0) || ($human == 0 && $computer==2) || ($human == 2 && $computer == 1)) {
+        return "You Win";
+    } else  {
+        return "You Lose";
     }
     return false;
 }
@@ -43,12 +43,12 @@ $result = check($computer, $human);
 <!DOCTYPE html>
 <html>
 <head>
-<title>Jesus Zapata, Paper, Scissors Game</title>
+<title>Leandro Hurtado Salazar</title>
 <?php require_once "bootstrap.php"; ?>
 </head>
 <body>
 <div class="container">
-<h1>Rock Paper Scissors</h1>
+<h1>A GANARLE A LA MAQUINA</h1>
 <?php
 if ( isset($_REQUEST['name']) ) {
     echo "<p>Welcome: ";
@@ -71,7 +71,7 @@ if ( isset($_REQUEST['name']) ) {
 <pre>
 <?php
 if ( $human == -1 ) {
-    print "Please select a strategy and press Play.\n";
+    print "A ganar.\n";
 } else if ( $human == 3 ) {
     for($c=0;$c<3;$c++) {
         for($h=0;$h<3;$h++) {
