@@ -87,7 +87,7 @@ $resultado = check($computer, $human);
             }
         }
         else{
-            echo "Your Play=" . $names[$human] . "Estrategia CPU = $names[$computer]   Resultado = $resultado</br>";
+            echo "Your Play= $names[$human] Computer PLay= $names[$computer]   Resultado = $resultado</br>";
         }
         ?>
     </body>
